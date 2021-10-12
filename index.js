@@ -16,7 +16,7 @@ class Logger {
       LOG_LEVEL_INDEX[level.toLowerCase()] || LOG_LEVEL_INDEX["error"];
   }
 
-  constructor(level = "error", tag = "simple-logger", tz = "UTC", file = "") {
+  constructor(level = "error", tag = "simple-logger", tz = "UTC", file = null) {
     this.level = level;
     this.tag = tag;
     this.tz = tz;
@@ -35,15 +35,15 @@ class Logger {
         }] ${[...msg].join(" ")}`;
 
         console.log(logMessage);
-        if (this.logFileStream?.writable) {
+        if (this.logFileStream && this.logFileStream.writable) {
           this.logFileStream.write(logMessage + "\n");
         }
       };
     }
   }
 
-  static createLogger(logLevel, loggerTag, timezone, filepath) {
-    return new Logger(logLevel, loggerTag, timezone, filepath);
+  static createLogger(logLevel, logTag, timezone, filepath) {
+    return new Logger(logLevel, logTag, timezone, filepath);
   }
 }
 
