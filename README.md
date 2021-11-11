@@ -30,7 +30,7 @@ logger.mark("mark log");
 ## Options
 
 ```
-createLogger(logLevel, logTag, timezone, filepath)
+createLogger(logLevel, logTag, timezone, filepath, format)
 ```
 
 - `logLevel` : default `error`. You can choose this parameter from `fatal | error | warn | info | debug | trace`
@@ -66,4 +66,31 @@ const logger = require("@taharactrl/simple-logger").createLogger(
 );
 
 logger.mark("mark log");
+```
+
+- `format`: default `text`. If this parameter is `json`, output logs are json format.
+
+```js
+const logger = require("./index").createLogger(
+  "debug",
+  "simple-logger",
+  "UTC",
+  null,
+  "json"
+);
+
+logger.mark({ msg: "mark log" });
+
+/*
+{
+    "timestamp": "2021-11-11T09:53:43.063+00:00",
+    "logLevel": "MARK",
+    "logTag": "simple-logger",
+    "logMessages": [
+        {
+            "msg": "mark log"
+        }
+    ]
+}
+ */
 ```
